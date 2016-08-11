@@ -136,6 +136,13 @@ mkdir -p $HOME/.plotly && aws s3 cp $TELEMETRY_CONF_BUCKET/plotly_credentials $H
 HIVE_CONFIG_SCRIPT=$(cat <<EOF
 while ! hive -e 'show tables' > /dev/null; do sleep 1; done
 /home/hadoop/anaconda2/bin/parquet2hive s3://telemetry-parquet/longitudinal | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://telemetry-parquet/crash_aggregates | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://telemetry-parquet/client_count | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://telemetry-parquet/main_summary | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://net-mozaws-prod-us-west-2-pipeline-analysis/mobile/android_clients | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://net-mozaws-prod-us-west-2-pipeline-analysis/mobile/android_events  | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://net-mozaws-prod-us-west-2-pipeline-analysis/mobile/android_addons  | bash
+/home/hadoop/anaconda2/bin/parquet2hive s3://net-mozaws-prod-us-west-2-pipeline-analysis/mobile/mobile_clients  | bash
 exit 0
 EOF
 )
